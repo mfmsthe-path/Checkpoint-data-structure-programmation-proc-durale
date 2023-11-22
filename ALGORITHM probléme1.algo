@@ -1,0 +1,48 @@
+ALGORITHM Peobléme1
+VAR
+    E1,E2,: ARRAY_OF INTEGER [length]; // declare 2 variable with the name "E1","E2",of type "integer"
+    i,j,S:= INTEGER:=0
+    trouver:=BOOLEAN:=false
+BEGIN
+     E1:= [3, 1, 7, 9]; E2:=[2, 4, 1, 9, 3]; S:=0 // declare 3 variable with the name,"E1","2","S" with their value of type "integer"
+        FOR i FROM 0 TO E1.length-1  STEP 1 DO
+        FOR j FROM 0 TO E2.length-1 STEP 1   DO
+        IF (E1[i]=E2[j]) THEN
+            trouver:=true;
+            BREAK; // Quitte la boucle interne si un élément correspond
+        END_IF
+        FOR i FROM 0 TO E2.length-1 STEP 1 DO
+        IF (E2[i]=E1[j]) THEN
+            trouver:=false;
+        END_IF
+        END_FOR
+           // Si l'élément n'est pas présent dans l'autre tableau, ajoute-le à la somme
+        IF NOT trouver THEN
+            somme := somme + E1[i];
+        END_IF    
+        END_FOR
+         // Réinitialise la variable "trouver" pour la deuxième itération
+        trouver:= FALSE;
+
+    // Parcours le deuxième tableau
+    FOR i FROM 0 TO E2.length-1 STEP 1 DO
+
+        // Parcours le premier tableau pour comparer les éléments
+    FOR j FROM 0 TO E1.length-1 STEP 1 DO
+            IF E2[i] = E1[j] THEN
+                element_present := TRUE;  // Marque l'élément comme présent s'il est trouvé dans l'autre tableau
+                BREAK;  // Quitte la boucle interne si un élément correspond
+            END_IF
+        END_FOR
+ // Si l'élément n'est pas présent dans l'autre tableau, ajoute-le à la somme
+        IF NOT trouver THEN
+            somme := somme + E2[i];
+        END_IF
+    END_FOR
+
+    // Affiche la somme des éléments distincts
+    Write("La somme des éléments distincts est : " + somme;)
+END
+
+
+

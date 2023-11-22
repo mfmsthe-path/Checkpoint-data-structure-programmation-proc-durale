@@ -1,0 +1,62 @@
+PROCEDURE dot_product(v1,v2 ARRAY_OF INTEGER[length], VAR ps:INTEGER:=0)
+VAR
+    i:INTEGER;
+BEGIN
+       // Cette procédure calcule le produit scalaire entre deux vecteurs, v1 et v2.
+    // Elle utilise une boucle pour parcourir les composantes des vecteurs et accumule le résultat dans "ps".
+    FOR i FROM 0 TO v1.length - 1 STEP 1 DO
+        ps = ps + v1[i] * v2[i];  // Calcule le produit scalaire entre v1 et v2
+    END_FOR
+END
+
+ALGORITHM Orthogonal
+VAR
+    n : INTEGER;  // Le nombre de vecteurs
+    vectors : ARRAY_OF INTEGER[length];  // Un tableau de vecteurs
+BEGIN
+     // Cet algorithme détermine si un ensemble de vecteurs est orthogonal ou non.
+    // Il lit "n" pour obtenir le nombre de vecteurs et "vectors" pour stocker les vecteurs.
+    FOR i FROM 1 TO n DO
+        read_array(vectors[i]);  // Lit les composantes du vecteur depuis l'entrée
+        // Appelle la procédure "dot_product" pour calculer le produit scalaire
+        dot_product(vectors[i][1], vectors[i][2], ps);
+        IF (ps = 0) THEN
+            Write("Les vecteurs sont orthogonaux");  // Si le produit scalaire est nul, les vecteurs sont orthogonaux
+        ELSE
+            Write("Les vecteurs ne sont pas orthogonaux");  // Sinon, les vecteurs ne sont pas orthogonaux
+        END_IF
+    END_FOR
+END 
+
+// L'algorithme précédent en utilisant une fonction dot_product au lieu d'une procédure.
+FUNCTION dot_product_func (v1, v2: ARRAY_OF INTEGER[length], VAR ps :INTEGER := 0) : INTEGER
+VAR
+    i : INTEGER;
+BEGIN
+    // Cette fonction calcule le produit scalaire entre deux vecteurs, v1 et v2.
+    // Elle utilise une boucle pour parcourir les composantes des vecteurs et retourne le résultat.
+    FOR i FROM 0 TO v1.length - 1 STEP 1 DO
+        ps = ps + v1[i] * v2[i];  // Calcule le produit scalaire entre v1 et v2
+    END_FOR
+    RETURN ps;  // Retourne la valeur du produit scalaire
+END
+
+ALGORITHM Orthogonalavecfunction
+VAR
+    n : INTEGER;  // Le nombre de vecteurs
+    vectors : ARRAY_OF INTEGER[length];  // Un tableau de vecteurs
+
+BEGIN
+    // Cet algorithme détermine si un ensemble de vecteurs est orthogonal ou non en utilisant une fonction.
+    // Il lit "n" pour obtenir le nombre de vecteurs et "vectors" pour stocker les vecteurs.
+    FOR i FROM 1 TO n DO
+        read_array(vectors[i]);  // Lit les composantes du vecteur depuis l'entrée
+        // Appelle la fonction "dot_product_func" pour calculer le produit scalaire et stocke le résultat dans "ps".
+        ps = dot_product_func(vectors[i][1], vectors[i][2]);
+        IF (ps = 0) THEN
+            Write("Les vecteurs sont orthogonaux");  // Si le produit scalaire est nul, les vecteurs sont orthogonaux
+        ELSE
+            Write("Les vecteurs ne sont pas orthogonaux");  // Sinon, les vecteurs ne sont pas orthogonaux
+        END_IF
+    END_FOR
+END
